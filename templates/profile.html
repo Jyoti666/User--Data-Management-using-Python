@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+      <head>
+              <meta name="viewport" content="width=device-width,initial-scale=1.0">
+             <title>Profile</title>
+             <style>
+                 body{
+                       background-color:green;
+                      overflow-x: scroll ; 
+                      overflow-y: scroll ;
+                     }
+
+                table{
+                    
+                    background-color: white;
+                    width: 50%;
+                    padding:2;
+                    border-spacing: 2;
+                    overflow-x:auto;
+                    border-radius: 5px;
+                }
+                td{
+                    font-size: 25px;
+                }
+                input[type=email],select{
+                    border-radius: 5px;
+                    width: 90%;
+                }
+                #name{
+                  border-radius: 5px;
+                    width: 90%;
+                }
+                
+                
+                caption{
+                    color: white;
+                }
+                
+                .avatar {
+                      vertical-align: middle;
+                      width: 100px;
+                      height: 100px;
+                      border-radius: 50%;
+                }
+                input[type=submit]{
+                    background-color: green;
+                    color: white;
+                    padding: 14px 20px;
+                    margin: 8px 0;
+                    border: none;
+                    cursor: pointer;
+                    width: 100%;
+                    border-radius: 15px;
+                }
+        
+                input[type=submit]:hover{
+                    background-color: lightgreen;
+                    color:black;
+                }
+              </style>
+      </head>
+<body>
+    
+    
+    <div id=div>
+    <form name="form" action="LOG UP.php" target="_self" method="post" onsubmit="return validating()">
+        
+            
+            
+            <table align="center" id="tbl" name="tbl" >
+            <caption align="top"><h1><u>Profile</u></h1></caption> 
+             <tr>
+                 <td colspan="2"><img src={{data[0]['user']['picture']['large']}} alt="Image" class="avatar"></td>         
+                 
+            </tr>
+             <tr>
+                 <td><b>Name:</b></td>
+                 <td>
+                     {{data[0]['user']['name']['title']+" "+data[0]['user']['name']['first']+" "+data[0]['user']['name']['last']}}
+                     
+                 </td> 
+                 
+            <tr>
+                 <td><b>Short Name:</b></td> 
+                 <td>{{data[0]['user']['name']['short']}}</td> 
+                        
+            </tr>
+            <tr>
+                 <td><b>Email:</b></td> 
+                 <td>{{data[0]['user']['email']}}</td> 
+                  
+                        
+            </tr>
+            <tr>
+                 <td><b>Contact:</b></td> 
+                 <td>
+                     {{data[0]['user']['contact-ext']+"-"+data[0]['user']['contact']}}
+                     
+                 </td> 
+                          
+            </tr>
+            <tr>
+                 <td><b>Join-Date:</b></td> 
+                 <td>{{data[0]['user']['join-date']}}</td>
+                          
+            </tr>
+            <tr>
+                 <td><b>Team:</b></td> 
+                 <td>{{data[0]['team']}}</td>
+                   
+                         
+            </tr>
+            <tr>
+                 <td><b>Job-Title:</b></td> 
+                 <td>{{data[0]['job-title']}}</td>
+                   
+                       
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="Back" name="back" formaction="{{ url_for('back')}}"></td>
+                 </td>
+            </tr>
+            
+            </table>
+            
+            
+            
+            
+            
+            
+            <input type="hidden" id="uid" name="uid" value={{data[1]}}>
+            
+            
+            
+            
+            <table align="center" id="tbl2" name="tbl2" >
+            <caption align="top"><h1><u>Edit Profile</u></h1></caption> 
+             <tr>
+                 <td><img src={{data[0]['user']['picture']['large']}} alt="Image" class="avatar"></td>         
+                 <td>
+                     <input type="file" name="img" id="img" onfocusout="myFunction()">
+                 </td>
+            </tr>
+             <tr>
+                 <td><b>Name:</b></td>
+                 <td>
+                     <select name="title" id="title">
+                        <option>Mr</option>
+                        <option>Ms</option>
+                     </select>
+                     <input type="text" name="fname" value={{data[0]['user']['name']['first']}} id="fname" placeholder="Enter First Name" autofocus required onfocusout="myFunction()">
+                     <input type="text" name="lname" value={{data[0]['user']['name']['last']}} id="lname" placeholder="Enter Last Name" required >
+                 </td> 
+                 
+            <tr>
+                 <td><b>Short Name:</b></td> 
+                 <td><input type="text" name="sname" value={{data[0]['user']['name']['short']}} id="sname" placeholder="Enter your short name" required></td> 
+                        
+            </tr>
+            <tr>
+                 <td><b>Email:</b></td> 
+                 <td><input type="email name="email" value={{data[0]['user']['email']}} id="email" placeholder="Enter Email" required></td> 
+                  
+                        
+            </tr>
+            <tr>
+                 <td><b>Contact:</b></td> 
+                 <td>
+                     <input type="text" onclick="f()" name="cext" value={{data[0]['user']['contact-ext']}} id="cext" placeholder="ex: +91" required>
+                     <input type="number" name="cnum" value={{data[0]['user']['contact']}} placeholder="ex: 9999999999" id="cnum" required>
+                 </td> 
+                          
+            </tr>
+            <tr>
+                 <td><b>Join-Date:</b></td> 
+                 <td><input type="text" name="jdate" value={{data[0]['user']['join-date']}} id="jdate" placeholder="ex: 06-Jan-2021" required></td>
+                          
+            </tr>
+            <tr>
+                 <td><b>Team:</b></td> 
+                 <td><input type="text" name="team" value={{data[0]['team']}} id="team" placeholder="ex: Development" required></td>
+                   
+                         
+            </tr>
+            <tr>
+                 <td><b>Job-Title:</b></td> 
+                 <td><input type="text" name="jtitle" value={{data[0]['job-title']}} id="jtitle" placeholder="ex: Software Developer" required></td>
+                   
+                       
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="Update" name="update" formaction="{{ url_for('update')}}" onclick="status()"></td>
+                 </td>
+            </tr>
+            
+            </table>   
+    </form>
+</div>
+ <script type="text/javascript">
+ document.getElementById("tbl2").style.display = "none"; 
+  
+       
+       setTimeout(
+              function(){ 
+                  var ack=confirm("Do you wan to edit data!"); 
+                  if(ack){
+                      document.getElementById("tbl").style.display = "none";
+                      document.getElementById("tbl2").style.display = "block";
+                  }
+                  
+                }, 3000);   
+                    
+    function status(){
+        alert("Data Updated");
+    }
+ </script>                           
+</body>
+</html>
