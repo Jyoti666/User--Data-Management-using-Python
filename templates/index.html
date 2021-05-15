@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+ <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+ <title>MAIN PAGE </title>
+<style type="text/css">
+        body{
+		    background-color:green;
+		}
+        
+        table{
+            
+            width:40%;
+            border-radius:15px;
+        }
+        #uid{
+            width: 50%;
+            padding: 12px 20px;
+            margin: 8px 8px;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            border-radius:10px;
+        }
+        input[type=submit]{
+            background-color: green;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 15px;
+        }
+        
+        input[type=submit]:hover{
+            background-color: lightgreen;
+            color:black;
+        }
+        
+
+</style>		
+ </head>
+ <body >
+     <form method="post" enctype = "multipart/form-data" >
+          <table align="center" bgcolor=white>
+        
+                <tr><td>
+                    <select name="uid" id="uid">
+                        <option>Select User ID</option>
+                        {%for i in id:%}
+  
+                        <option value={{i}}>{{i}}</option>
+                        {%endfor%}
+                    </select>
+                    </td></tr>
+                    <tr>
+                        <td>
+                            <input type="submit" value="Show Profile" name="submit" formaction="{{ url_for('profile')}}" onclick="return checkInp()"></td>
+                        </td>
+                    </tr>
+               
+          </table>
+    </form>
+    
+    <script type="text/javascript">
+    
+        function checkInp()
+        {
+        
+          var x=document.getElementById("uid").value;
+          if (isNaN(x)) 
+            {
+                alert("Select correct User ID");
+                return false;
+          }
+        }
+        
+       
+        
+    </script>    
+ </body>
+ </html>         
